@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
 
 
@@ -34,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(this)
                         .text("New update available")
                         .textColor(Color.WHITE)
+                        .textSize(18)
                         .icon(R.drawable.ic_file_download)
                         // .backgroundColor(Color.parseColor("#23ad33"))
                         .background(R.drawable.shape_info)
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         .duration(Toast.LENGTH_LONG)
                         .text("Your collection has been updated")
                         .textColor(Color.WHITE)
+                        .textSize(20)
                         .typeface(Typeface.createFromAsset(getAssets(), "fonts/dosis.otf"))
                         //.backgroundColor(Color.parseColor("#cc3784"))
                         .background(R.drawable.shape_warning)
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(this)
                         .text("Thank you for your health donation!")
                         .textColor(Color.WHITE)
+                        .textSize(22)
                         //.textColor(Color.parseColor("#6063b2"))
                         .strokeWidth(2)
                         .duration(Toast.LENGTH_LONG)
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         .text("Phone is overheating!")
                         .textBold()
                         .textColor(Color.parseColor("#FFDA44"))
+                        .textSize(24)
                         .cornerRadius(5)
                         .build();
                 break;

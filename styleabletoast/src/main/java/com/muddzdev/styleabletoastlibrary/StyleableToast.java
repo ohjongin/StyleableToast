@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
+import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
@@ -64,6 +65,7 @@ public class StyleableToast implements OnToastFinished {
     private int backgroundColor = DEFAULT_BACKGROUND;
     private int alpha = DEFAULT_ALPHA;
     private int textColor = DEFAULT_TEXT_COLOR;
+    private float textSize = DEFAULT_TEXT_SIZE;
     private final Context context;
     private TextView textView;
     private Typeface typeface;
@@ -92,6 +94,7 @@ public class StyleableToast implements OnToastFinished {
         this.text = builder.text;
         this.textColor = builder.textColor;
         this.textBold = builder.textBold;
+        this.textSize = builder.textSize;
         this.duration = builder.duration;
         this.backgroundColor = builder.backgroundColor;
         this.backgroundDrawable = builder.backgroundDrawable;
@@ -128,6 +131,10 @@ public class StyleableToast implements OnToastFinished {
      */
     public void setTextColor(@ColorInt int textColor) {
         this.textColor = textColor;
+    }
+
+    public void setTextSize(float sizeSp) {
+        this.textSize = sizeSp;
     }
 
     /**
@@ -265,7 +272,7 @@ public class StyleableToast implements OnToastFinished {
         getTextViewAttributes();
         textView = new TextView(context);
         textView.setText(text);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, DEFAULT_TEXT_SIZE);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         textView.setTextColor(textColor);
         textView.setTypeface(getTypeface());
         textView.setMaxLines(4);
@@ -451,6 +458,7 @@ public class StyleableToast implements OnToastFinished {
         private final Context context;
         private int backgroundColor = DEFAULT_BACKGROUND;
         private int textColor = DEFAULT_TEXT_COLOR;
+        private float textSize = DEFAULT_TEXT_SIZE;
         private int alpha = DEFAULT_ALPHA;
         private int duration = Toast.LENGTH_SHORT;
         private int cornerRadius = DEFAULT_CORNER_RADIUS;
@@ -477,6 +485,11 @@ public class StyleableToast implements OnToastFinished {
          */
         public Builder textColor(@ColorInt int textColor) {
             this.textColor = textColor;
+            return this;
+        }
+
+        public Builder textSize(float sizeSp) {
+            this.textSize= sizeSp;
             return this;
         }
 
