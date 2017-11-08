@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
                         .text("New update available")
                         .textColor(Color.WHITE)
                         .icon(R.drawable.ic_file_download)
-                        .backgroundColor(Color.parseColor("#23ad33"))
+                        // .backgroundColor(Color.parseColor("#23ad33"))
+                        .background(R.drawable.shape_info)
                         .build();
                 break;
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         .text("Your collection has been updated")
                         .textColor(Color.WHITE)
                         .typeface(Typeface.createFromAsset(getAssets(), "fonts/dosis.otf"))
-                        .backgroundColor(Color.parseColor("#cc3784"))
+                        //.backgroundColor(Color.parseColor("#cc3784"))
+                        .background(R.drawable.shape_warning)
                         .build();
                 break;
 
@@ -54,11 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 styleableToast = new StyleableToast
                         .Builder(this)
                         .text("Thank you for your health donation!")
-                        .textColor(Color.parseColor("#6063b2"))
+                        .textColor(Color.WHITE)
+                        //.textColor(Color.parseColor("#6063b2"))
                         .strokeWidth(2)
                         .duration(Toast.LENGTH_LONG)
                         .strokeColor(Color.parseColor("#989ad1"))
                         .backgroundColor(Color.WHITE)
+                        .background(R.drawable.shape_success)
                         .build();
 
                 break;

@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.text.BidiFormatter;
 import android.util.Log;
 import android.util.TypedValue;
@@ -71,6 +73,7 @@ public class StyleableToast implements OnToastFinished {
     private float strokeWidth;
     private String text;
     private DurationTracker durationTracker;
+    private Drawable backgroundDrawable = null;
 
 
     public static StyleableToast makeText(Context context, String text, int duration, int style) {
@@ -91,6 +94,7 @@ public class StyleableToast implements OnToastFinished {
         this.textBold = builder.textBold;
         this.duration = builder.duration;
         this.backgroundColor = builder.backgroundColor;
+        this.backgroundDrawable = builder.backgroundDrawable;
         this.strokeColor = builder.strokeColor;
         this.strokeWidth = builder.strokeWidth;
         this.alpha = builder.alpha;
@@ -242,7 +246,12 @@ public class StyleableToast implements OnToastFinished {
         int verticalPadding = (int) getTypedValueInDP(context, DEFAULT_VERTICAL_PADDING);
         RelativeLayout rootLayout = new RelativeLayout(context);
         rootLayout.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
-        rootLayout.setBackground(getShape());
+
+        if (backgroundDrawable != null) {
+            rootLayout.setBackground(backgroundDrawable);
+        } else {
+            rootLayout.setBackground(getShape());
+        }
         rootLayout.addView(getTextView());
         if (icon > 0) {
             rootLayout.addView(getIcon());
@@ -449,6 +458,7 @@ public class StyleableToast implements OnToastFinished {
         private boolean hasAnimation, textBold;
         private Typeface typeface;
         private String text;
+        private Drawable backgroundDrawable = null;
 
         public Builder(@NonNull Context context) {
             this.context = context;
@@ -513,6 +523,16 @@ public class StyleableToast implements OnToastFinished {
 
         public Builder backgroundColor(@ColorInt int backgroundColor) {
             this.backgroundColor = backgroundColor;
+            return this;
+        }
+
+        public Builder background(@DrawableRes int resId) {
+            this.backgroundDrawable = ContextCompat.getDrawable(context, resId);
+            return this;
+        }
+
+        public Builder background(Drawable drawable) {
+            this.backgroundDrawable = drawable;
             return this;
         }
 
