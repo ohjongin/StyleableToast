@@ -11,8 +11,6 @@ import android.util.TypedValue;
  */
 
 public class Utils {
-
-
     public static float getTypedValueInDP(Context context, float value) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
     }
@@ -69,5 +67,4 @@ public class Utils {
         }
         return a.getBoolean(0, false);
     }
-
 }

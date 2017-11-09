@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button2:
                 styleableToast = new StyleableToast
                         .Builder(this)
-                        .text("New update available")
+                        .text(fromHtml("<b>New</b> update <font color=\"#ff4350\">available</font>"))
                         .textColor(Color.WHITE)
                         .textSize(18)
                         .icon(R.drawable.ic_file_download)
@@ -96,5 +98,15 @@ public class MainActivity extends AppCompatActivity {
             styleableToast.show();
             styleableToast = null;
         }
+    }
+
+    protected Spanned fromHtml(CharSequence html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html.toString(), Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html.toString());
+        }
+        return result;
     }
 }

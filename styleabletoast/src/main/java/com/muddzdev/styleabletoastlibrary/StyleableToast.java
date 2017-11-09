@@ -9,13 +9,13 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.text.BidiFormatter;
-import android.util.Log;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -73,16 +73,16 @@ public class StyleableToast implements OnToastFinished {
     private int style, icon, strokeColor, duration;
     private boolean textBold, hasAnimation;
     private float strokeWidth;
-    private String text;
+    private CharSequence text;
     private DurationTracker durationTracker;
     private Drawable backgroundDrawable = null;
 
 
-    public static StyleableToast makeText(Context context, String text, int duration, int style) {
+    public static StyleableToast makeText(Context context, CharSequence text, int duration, int style) {
         return new StyleableToast(context, text, duration, style);
     }
 
-    private StyleableToast(@NonNull Context context, String text, int duration, @StyleRes int style) {
+    private StyleableToast(@NonNull Context context, CharSequence text, int duration, @StyleRes int style) {
         this.context = context;
         this.text = text;
         this.duration = duration;
@@ -451,6 +451,17 @@ public class StyleableToast implements OnToastFinished {
         }
     }
 
+    @SuppressWarnings("deprecation")
+    protected Spanned fromHtml(CharSequence html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html.toString(), Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html.toString());
+        }
+        return result;
+    }
+
 
     //--------------------BUILDER--------------------
 
@@ -465,7 +476,7 @@ public class StyleableToast implements OnToastFinished {
         private int strokeWidth, icon, strokeColor;
         private boolean hasAnimation, textBold;
         private Typeface typeface;
-        private String text;
+        private CharSequence text;
         private Drawable backgroundDrawable = null;
 
         public Builder(@NonNull Context context) {
@@ -475,7 +486,7 @@ public class StyleableToast implements OnToastFinished {
         /**
          * @param text Text to be shown in the StyleableToast
          */
-        public Builder text(String text) {
+        public Builder text(CharSequence text) {
             this.text = text;
             return this;
         }
