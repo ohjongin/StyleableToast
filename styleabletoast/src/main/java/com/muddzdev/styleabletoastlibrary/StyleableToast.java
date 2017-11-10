@@ -133,8 +133,8 @@ public class StyleableToast implements OnToastFinished {
         this.textColor = textColor;
     }
 
-    public void setTextSize(float sizeSp) {
-        this.textSize = sizeSp;
+    public void setTextSize(float sizeDp) {
+        this.textSize = sizeDp;
     }
 
     /**
@@ -272,7 +272,7 @@ public class StyleableToast implements OnToastFinished {
         getTextViewAttributes();
         textView = new TextView(context);
         textView.setText(text);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
         textView.setTextColor(textColor);
         textView.setTypeface(getTypeface());
         textView.setMaxLines(4);
@@ -499,8 +499,8 @@ public class StyleableToast implements OnToastFinished {
             return this;
         }
 
-        public Builder textSize(float sizeSp) {
-            this.textSize= sizeSp;
+        public Builder textSize(float sizeDp) {
+            this.textSize= sizeDp;
             return this;
         }
 
