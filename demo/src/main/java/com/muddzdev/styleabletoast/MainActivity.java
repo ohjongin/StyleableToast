@@ -25,18 +25,17 @@ public class MainActivity extends AppCompatActivity {
     public void Toaster(View v) {
         switch (v.getId()) {
             case R.id.button1:
-                StyleableToast.makeText(this, "Turn off fly mode", Toast.LENGTH_LONG, R.style.StyleableToast).show();
+                StyleableToast.makeText(this, "Turn off fly mode", Toast.LENGTH_SHORT, R.style.StyleableToast).show();
                 break;
 
             case R.id.button2:
                 styleableToast = new StyleableToast
                         .Builder(this)
-                        .text(fromHtml("<b>New</b> update <font color=\"#ff4350\">available</font>"))
+                        .text(fromHtml("New update available"))
                         .textColor(Color.WHITE)
                         .textSize(18)
                         .icon(R.drawable.ic_file_download)
-                        // .backgroundColor(Color.parseColor("#23ad33"))
-                        .background(R.drawable.shape_info)
+                        .backgroundColor(Color.parseColor("#23ad33"))
                         .build();
                 break;
 
@@ -46,10 +45,8 @@ public class MainActivity extends AppCompatActivity {
                         .duration(Toast.LENGTH_LONG)
                         .text("Your collection has been updated")
                         .textColor(Color.WHITE)
-                        .textSize(20)
                         .typeface(Typeface.createFromAsset(getAssets(), "fonts/dosis.otf"))
-                        //.backgroundColor(Color.parseColor("#cc3784"))
-                        .background(R.drawable.shape_warning)
+                        .backgroundColor(Color.parseColor("#cc3784"))
                         .build();
                 break;
 
@@ -57,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 styleableToast = new StyleableToast
                         .Builder(this)
                         .text("Thank you for your health donation!")
-                        .textColor(Color.WHITE)
-                        .textSize(22)
-                        //.textColor(Color.parseColor("#6063b2"))
+                        .textColor(Color.parseColor("#6063b2"))
                         .strokeWidth(2)
                         .duration(Toast.LENGTH_LONG)
                         .strokeColor(Color.parseColor("#989ad1"))
@@ -76,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                         .text("Phone is overheating!")
                         .textBold()
                         .textColor(Color.parseColor("#FFDA44"))
-                        .textSize(24)
                         .cornerRadius(5)
                         .build();
                 break;
@@ -91,6 +85,44 @@ public class MainActivity extends AppCompatActivity {
                         .textColor(Color.WHITE)
                         .backgroundColor(Color.parseColor("#184c6d"))
                         .build();
+                break;
+
+            case R.id.button7:
+                styleableToast = new StyleableToast
+                        .Builder(this)
+                        .text(fromHtml("<b>New</b> update <font color=\"#ff4350\">available</font>"))
+                        .textColor(Color.WHITE)
+                        .textSize(18)
+                        .icon(R.drawable.ic_file_download)
+                        .backgroundColor(Color.parseColor("#23ad33"))
+                        .build();
+                break;
+
+            case R.id.button8:
+                styleableToast = new StyleableToast
+                        .Builder(this)
+                        .duration(Toast.LENGTH_LONG)
+                        .text("Your collection has been updated")
+                        .textColor(Color.WHITE)
+                        .textSize(20)
+                        .typeface(Typeface.createFromAsset(getAssets(), "fonts/dosis.otf"))
+                        .background(R.drawable.shape_warning)
+                        .build();
+                break;
+
+            case R.id.button9:
+                styleableToast = new StyleableToast
+                        .Builder(this)
+                        .text("Thank you for your health donation!")
+                        .textColor(Color.WHITE)
+                        .textSize(24)
+                        .strokeWidth(2)
+                        .duration(Toast.LENGTH_LONG)
+                        .strokeColor(Color.parseColor("#989ad1"))
+                        .backgroundColor(Color.WHITE)
+                        .background(R.drawable.shape_success)
+                        .build();
+
                 break;
         }
 

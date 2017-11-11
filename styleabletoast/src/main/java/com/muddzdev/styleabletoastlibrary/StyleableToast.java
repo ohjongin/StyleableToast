@@ -17,7 +17,9 @@ import android.support.v4.text.BidiFormatter;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -76,6 +78,7 @@ public class StyleableToast implements OnToastFinished {
     private CharSequence text;
     private DurationTracker durationTracker;
     private Drawable backgroundDrawable = null;
+    private ViewGroup rootView;
 
 
     public static StyleableToast makeText(Context context, CharSequence text, int duration, int style) {
@@ -84,12 +87,14 @@ public class StyleableToast implements OnToastFinished {
 
     private StyleableToast(@NonNull Context context, CharSequence text, int duration, @StyleRes int style) {
         this.context = context;
+        this.rootView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.toast, null);
         this.text = text;
         this.duration = duration;
         this.style = style;
     }
 
     private StyleableToast(StyleableToast.Builder builder) {
+        this.rootView = (ViewGroup) LayoutInflater.from(builder.context).inflate(R.layout.toast, null);
         this.context = builder.context.getApplicationContext();
         this.text = builder.text;
         this.textColor = builder.textColor;
@@ -251,15 +256,15 @@ public class StyleableToast implements OnToastFinished {
         getIconAttributes();
         int horizontalPadding = (int) getTypedValueInDP(context, DEFAULT_HORIZONTAL_PADDING);
         int verticalPadding = (int) getTypedValueInDP(context, DEFAULT_VERTICAL_PADDING);
-        RelativeLayout rootLayout = new RelativeLayout(context);
-        rootLayout.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+        ViewGroup rootLayout = rootView;
+        // rootLayout.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
 
         if (backgroundDrawable != null) {
             rootLayout.setBackground(backgroundDrawable);
         } else {
             rootLayout.setBackground(getShape());
         }
-        rootLayout.addView(getTextView());
+        setTextViewAttributes();
         if (icon > 0) {
             rootLayout.addView(getIcon());
             rootLayout.setPadding(0, verticalPadding, 0, verticalPadding);
@@ -268,9 +273,9 @@ public class StyleableToast implements OnToastFinished {
         return rootLayout;
     }
 
-    private TextView getTextView() {
+    private void setTextViewAttributes() {
         getTextViewAttributes();
-        textView = new TextView(context);
+        textView = (TextView) rootView.findViewById(R.id.text);
         textView.setText(text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
         textView.setTextColor(textColor);
@@ -282,15 +287,13 @@ public class StyleableToast implements OnToastFinished {
             int leftPadding = (int) getTypedValueInDP(context, 41);
             int rightPadding = (int) getTypedValueInDP(context, 25);
 
-            //Make space between icon and textview and textview and edge of the shape.
+            // Make space between icon and textview and textview and edge of the shape.
             if (BidiFormatter.getInstance().isRtlContext()) {
                 textView.setPadding(rightPadding, 0, leftPadding, 0);
             } else {
                 textView.setPadding(leftPadding, 0, rightPadding, 0);
             }
         }
-
-        return textView;
     }
 
 

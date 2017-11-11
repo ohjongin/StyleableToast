@@ -45,6 +45,7 @@
         android:textStyle="bold" />
 
     <RelativeLayout
+        android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button1"
@@ -88,6 +89,54 @@
             android:onClick="Toaster"
             android:padding="5dp"
             android:text="Toast 6"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:background="#ff5a5f"
+            android:fontFamily="sans-serif-condensed"
+            android:onClick="Toaster"
+            android:padding="5dp"
+            android:text="Toast 7"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:background="#ff5a5f"
+            android:fontFamily="sans-serif-condensed"
+            android:onClick="Toaster"
+            android:padding="5dp"
+            android:text="Toast 8"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="#ff5a5f"
+            android:fontFamily="sans-serif-condensed"
+            android:onClick="Toaster"
+            android:padding="5dp"
+            android:text="Toast 9"
             android:textColor="#fff"
             android:textStyle="bold" />
 
